@@ -1,0 +1,32 @@
+Benchmark                 Time             CPU   Iterations
+-----------------------------------------------------------
+knapsack_handler_greedy       6655 ns         6655 ns       105795
+knapsack_handler_greedy       7608 ns         7608 ns        89813
+knapsack_handler_greedy       8641 ns         8641 ns        80395
+knapsack_handler_greedy       9386 ns         9386 ns        71916
+knapsack_handler_greedy       9609 ns         9609 ns        71368
+knapsack_handler_greedy       7826 ns         7817 ns        87483
+knapsack_handler_greedy      13029 ns        13027 ns        50168
+knapsack_handler_greedy      13935 ns        13932 ns        48472
+knapsack_handler_greedy      14613 ns        14614 ns        43251
+knapsack_handler_greedy      15741 ns        15741 ns        45431
+knapsack_handler_greedy      16336 ns        16336 ns        42740
+knapsack_handler_greedy      17034 ns        17034 ns        41514
+knapsack_handler_greedy      18272 ns        18272 ns        39417
+knapsack_handler_greedy      18161 ns        18161 ns        37428
+knapsack_handler_greedy      19697 ns        19693 ns        35475
+knapsack_handler_greedy      20858 ns        20857 ns        34960
+knapsack_handler_greedy      21362 ns        21360 ns        33982
+knapsack_handler_greedy      21688 ns        21686 ns        31445
+knapsack_handler_greedy      19895 ns        19893 ns        32573
+knapsack_handler_greedy      17596 ns        17595 ns        39373
+knapsack_handler_greedy      18297 ns        18297 ns        38153
+knapsack_handler_greedy      25480 ns        25473 ns        27303
+knapsack_handler_greedy      28461 ns        28461 ns        24122
+knapsack_handler_greedy      29999 ns        29989 ns        23001
+knapsack_handler_greedy      30756 ns        30755 ns        22545
+knapsack_handler_greedy      31230 ns        31230 ns        22119
+knapsack_handler_greedy      32828 ns        32825 ns        21368
+knapsack_handler_greedy      33827 ns        33826 ns        20282
+knapsack_handler_greedy       7145 ns         7143 ns        95901
+knapsack_handler_greedy       9757 ns         9757 ns        67626

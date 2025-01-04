@@ -6,7 +6,7 @@
 %
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
-\usepackage[romanian]{babel}
+\usepackage[english]{babel}
 \usepackage{url}
 \usepackage{hyperref}
 \usepackage{listings}
@@ -35,14 +35,14 @@
 }
 \begin{document}
 %
-\title{Problema Rucsacului - Knapsack Problem}
+\title{The Knapsack Problem}
 %
 %\titlerunning{Abbreviated paper title}
 % If the paper title is too long for the running head, you can set
 % an abbreviated paper title here
 %
-\author{Gabriel-Ioan PAVEL \and
-Andrei RUSĂNESCU \and
+\author{Andrei RUSĂNESCU,
+ Gabriel-Ioan PAVEL,
 Amir FALLAH-MIRZAEI}
 %
 \institute{Universitatea de Știință și Tehnologie POLITEHNICA București}
@@ -50,15 +50,21 @@ Amir FALLAH-MIRZAEI}
 \maketitle              % typeset the header of the contribution
 %
 \begin{abstract}
-Acest raport reprezintă analiza câtorva algoritmi ce rezolvă Problema Rucsacului
+The present paper analyses several algorithms that solve the Knapsack problem,
+taking into account both the speed and the memory used by the program. It
+presents three solutions, two of which always generate the correct answer, and
+one that obtains a result close to the right one.
 
 \end{abstract}
 %
 %
 %
-\section{Introducere}
-Problema Rucsacului reprezintă problema alocării și gestionării de resurse limitate,
-unde ținta este obținerea unui profit maxim.
+\section{Introduction}
+The Knapsack problem derives its name from the situation faced by someone who wants
+to fill their limited-capacity knapsack with the most valuable items that can fit.
+You can choose whether to put it in the bag or not put it at all, hence the name
+"0/1 Knapsack Problem". The problem has been studied for more than a century, with
+writings dating as far back as 1897. 
 
 \subsubsection{Aplicații practice} Printre domeniile în care apare Problema
 Rucsacului se numără: găsirea unei metode cât mai puțin risipitoare de a tăia

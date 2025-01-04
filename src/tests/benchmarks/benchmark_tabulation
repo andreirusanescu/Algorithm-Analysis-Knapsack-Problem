@@ -1,0 +1,32 @@
+Benchmark                 Time             CPU   Iterations
+-----------------------------------------------------------
+knapsack_handler_tabulation     384703 ns       384689 ns         1984
+knapsack_handler_tabulation     436735 ns       436736 ns         1673
+knapsack_handler_tabulation     391284 ns       391282 ns         1833
+knapsack_handler_tabulation     475207 ns       475209 ns         1387
+knapsack_handler_tabulation     484376 ns       484366 ns         1459
+knapsack_handler_tabulation     457908 ns       457905 ns         1607
+knapsack_handler_tabulation     681089 ns       681096 ns          899
+knapsack_handler_tabulation     578427 ns       578433 ns         1189
+knapsack_handler_tabulation     486071 ns       486068 ns         1325
+knapsack_handler_tabulation     606410 ns       606180 ns         1151
+knapsack_handler_tabulation     830244 ns       830250 ns          849
+knapsack_handler_tabulation     457976 ns       457972 ns         1567
+knapsack_handler_tabulation     668877 ns       668880 ns          919
+knapsack_handler_tabulation     702154 ns       702139 ns         1089
+knapsack_handler_tabulation    1036479 ns      1036362 ns          620
+knapsack_handler_tabulation     821381 ns       821359 ns          810
+knapsack_handler_tabulation     638787 ns       638789 ns          974
+knapsack_handler_tabulation     767940 ns       767943 ns          824
+knapsack_handler_tabulation     886034 ns       886029 ns          796
+knapsack_handler_tabulation     640337 ns       640332 ns         1047
+knapsack_handler_tabulation    1069756 ns      1069763 ns          671
+knapsack_handler_tabulation     713198 ns       713200 ns          904
+knapsack_handler_tabulation     885141 ns       885119 ns          787
+knapsack_handler_tabulation     666830 ns       666825 ns         1007
+knapsack_handler_tabulation    1305285 ns      1305278 ns          559
+knapsack_handler_tabulation    1401675 ns      1401681 ns          524
+knapsack_handler_tabulation     748267 ns       748253 ns          746
+knapsack_handler_tabulation    1096895 ns      1096885 ns          630
+knapsack_handler_tabulation     352557 ns       352552 ns         1973
+knapsack_handler_tabulation     303310 ns       303310 ns         2216

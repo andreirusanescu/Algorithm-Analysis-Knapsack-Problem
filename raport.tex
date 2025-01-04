@@ -22,6 +22,29 @@
 \usepackage[romanian]{babel}
 \usepackage{url}
 \usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=C++,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
 \begin{document}
 %
 \title{Problema Rucsacului - Knapsack Problem}
@@ -59,6 +82,142 @@ pentru securitizare garantată cu active etc.
 
 \section{Prezentarea algoritmilor}
 %TODO: Gebi
+\subsection{Programare dinamică}
+Rezolvarea problemei prin metoda programării dinamice reprezintă construirea
+unei matrici ce stochează profitul maxim pentru subproblemele definite de
+primele \textbf{i} obiecte și o capacitate \textbf{w} a rucsacului.
+
+\begin{lstlisting}
+int knapsack(const int &maxWeight, std::vector<int> &weights, std::vector<int> &values) {
+	// numar de obiecte
+	int n = weights.size();
+
+	/* matrice - dp[i][w] == profitul maxim ce poate fi obtinut folosind primele i obiecte cu limita de masa w */
+	std::vector<std::vector<int>> dp(n + 1, std::vector<int>(maxWeight + 1));
+
+	/* daca nu intra niciun obiect in calcul sau masa maxima este 0, atunci profitul este 0 */
+	for (int i = 0; i <= n; ++i)
+		dp[i][0] = 0;
+	for (int j = 0; j <= maxWeight; ++j)
+		dp[0][j] = 0;
+\end{lstlisting}
+
+Următoarea buclă parcurge fiecare element al matricei, unde fiecare linie
+reprezintă un obiect, iar fiecare coloană reprezintă o masă maximă, astfel
+încât dp[i][w] reprezintă profitul maxim obținut folosind primele \textbf{i}
+obiecte cu limita de masă \textbf{w}.
+
+Logica este următoarea: dacă obiectul curent
+se încadrează în masa maximă curentă, atunci alegem să îl includem sau să îl
+excludem din calcul, în funcție de profitul maxim pe care îl putem obține. Mai exact,
+dacă alegem să îl includem, adunăm valoarea sa cu profitul maxim care se poate obține
+având în vedere masa folosibilă rămasă, iar, dacă alegem să îl excludem, păstrăm profitul
+maxim ce poate fi obținut precedent.
+
+Contrar, dacă masa obiectului curent întrece limita curentă, acesta va fi exclus din calcul,
+păstrându-se profitul precedent.
+
+\begin{lstlisting}
+	for (int i = 1; i <= n; ++i) {
+		for (int w = 1; w <= maxWeight; ++w) {
+			if (weights[i - 1] <= w)
+				dp[i][w] = std::max(values[i - 1] + dp[i - 1][w - weights[i - 1]], dp[i - 1][w]);
+			else
+				dp[i][w] = dp[i - 1][w];
+		}
+	}
+
+	return dp[n][maxWeight];
+}
+\end{lstlisting}
+
+Rezultatul căutat se află pe ultima poziție din tabel.
+
+\subsubsection{Analiza complexității}
+
+\paragraph{Complexitate temporală} Primele două bucle \textit{for} execută \textbf{n},
+respectiv \textbf{maxWeight} operații de timp constant. Pentru următoarele două bucle,
+cea exterioară iterează prin fiecare obiect, iar cea interioară prin fiecare masă maximă
+posibilă. Operațiile executate în interiorul buclei interne sunt de timp constant. Astfel,
+complexitatea temporală a algoritmului este de \textbf{O(n * maxWeight)}.
+
+\paragraph{Complexitate spațială} Întrucât este folosită o matrice de dimensiuni \textbf{(n+1) * (maxWeight+1)},
+complexitatea spațială este \textbf{O(n * maxWeight)}.
+
+\subsubsection{Avantaje și dezavantaje}
+
+\paragraph{Avantaje} Avantajele principale sunt reprezentate de viteza de execuție, întrucât se poate
+obține un rezultat în timp rezonabil și evitarea problemelor ce ar fi putut apărea în situația
+folosirii recursivității, precum supraîncărcarea stivei.
+
+\paragraph{Dezavantaje} Dezavantajele principale sunt reprezentate de folosirea unei zone mari de
+memorie și faptul că dimensiunea matricii nu poate fi ajustată dinamic fără recalcularea valorilor.
+
+
+\subsection{Memoizare}
+Această metodă de programare dinamică se folosește de memoizare și recursivitate pentru
+a evita recalcularea inutilă a unor subprobleme.
+
+Execuția începe în funcția auxiliară, \textbf{knapSackMemoHelper}, care inițializează variabilele
+și începe execuția algoritmului propriu-zis.
+
+\begin{lstlisting}
+inline int knapSackMemoHelper(int W, std::vector<int> &weights, std::vector<int> &vals) {
+	int n = weights.size();
+	std::vector<std::vector<int>> memo(n, std::vector<int>(W + 1, -1));
+
+	/* W - capacitatea maxima curenta, index - indicele obiectului curent */
+	return knapSackMemo(W, weights, vals, n - 1, memo);
+}
+\end{lstlisting}
+
+Funcția principală începe prin a verifica cazul opririi recursivității - s-au
+luat în calcul toate obiectele - ca apoi să verifice dacă profitul pentru obiectul
+curent și capacitatea W a fost deja calculat. În caz afirmativ, rezultatul este întors
+direct, fără a mai fi făcute calcule redundante.
+
+Algoritmul verifică dacă masa obiectului curent este mai mare decât capacitatea rămasă
+în rucsac. Dacă da, obiectul trebuie exclus. Altfel, se calculează profitul maxim care
+se poate obține din includerea sau excluderea obiectului curent, similar cu metoda anterioară,
+și rezultatul este păstrat în matricea de memoizare.
+
+\begin{lstlisting}
+int knapSackMemo(int W, std::vector<int> &weights, std::vector<int> &vals, int index, std::vector<std::vector<int>> &memo) {
+	if (index < 0)
+		return 0;
+	
+	if (memo[index][W] != -1)
+		return memo[index][W];
+
+	if (weights[index] > W)
+		return memo[index][W] = knapSackMemo(W, weights, vals, index - 1, memo);
+
+	return memo[index][W] = std::max(
+		knapSackMemo(W, weights, vals, index - 1, memo),
+		vals[index] + knapSackMemo(W - weights[index], weights, vals, index - 1, memo));
+}
+\end{lstlisting}
+
+\subsubsection{Analiza complexității}
+
+\paragraph{Complexitate temporală} Fiecare subproblemă este unică, este rezolvată o singură
+dată și este definită de indicele unui obiect și capacitatea rămasă în rucsac într-un moment.
+Astfel, ajungem la un număr de \textbf{n * maxWeight} de subprobleme, iar complexitatea
+temporală ajunge să fie \textbf{O(n * maxWeight)}, întrucât operațiile ce trebuie executate
+pentru a rezolva subproblemele sunt de timp constrant.
+
+\paragraph{Complexitate spațială} Fiind folosită o matrice de dimensiune \textbf{n * (maxWeight + 1)},
+iar stiva având o dimensiune maximă de \textbf{n}, complexitatea spațială este de aproximativ
+\textbf{O(n * maxWeight)}.
+
+\subsubsection{Avantaje și dezavantaje}
+
+\paragraph{Avantaje} Principalele avantaje ale acestei abordări sunt reprezentate de viteza
+de execuție și calcului soluțiilor strict necesare, comparativ cu metoda programării dinamice,
+unde toate elementele matricii sunt calculate.
+
+\paragraph{Dezavantaje} Principalele dezavantaje sunt reprezentate de utilizarea unei zone mari de memorie
+și riscul unui stack overflow, atunci când \textbf{n} este foarte mare.
 
 \section{Evaluare}
 %TODO: Andrei + Gebi

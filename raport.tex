@@ -5,6 +5,7 @@
 \documentclass{llncs}
 %
 \usepackage[T1]{fontenc}
+\usepackage{float}
 \usepackage{graphicx}
 \usepackage[english]{babel}
 \usepackage{booktabs}
@@ -12,6 +13,7 @@
 \usepackage{hyperref}
 \usepackage{listings}
 \usepackage{color}
+\renewcommand{\floatpagefraction}{0.8}
 \renewcommand\UrlFont{\color{blue}\rmfamily}
 \urlstyle{rm}
 \definecolor{dkgreen}{rgb}{0,0.6,0}
@@ -408,7 +410,9 @@ solutions are needed for small tests.
 \begin{table}[ht]
     \centering
     \begin{tabular}{@{}lrrr@{}}
+		\toprule
         \textbf{Benchmark DP} & \textbf{Time (ns)} & \textbf{CPU (ns)} & \textbf{Iterations} \\
+		\midrule
         knapsack\_handler\_tabulation & 397274 & 397277 & 1851 \\
         knapsack\_handler\_tabulation & 451001 & 450761 & 1728 \\
         knapsack\_handler\_tabulation & 381943 & 381887 & 1507 \\
@@ -529,16 +533,55 @@ solutions are needed for small tests.
 \end{table}
 \clearpage
 
-
-
-
-
-
-
-
 \section{Conclusions}
 %TODO: Gebi
+The following images are graphs representing the performance of each algorithm:
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{img/greedy.png}
+    \caption{Time taken for the Greedy benchmarks}
+    \label{fig:greedy}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{img/backtracking.png}
+    \caption{Time taken for the Backtracking benchmarks}
+    \label{fig:backtracking}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{img/tabulation.png}
+    \caption{Time taken for the Tabulation benchmarks}
+    \label{fig:tabulation}
+\end{figure}
+\clearpage
+
+The graphs show the distribution of the performances of the algorithms
+based on the number of inputs and the execution time. Every algorithm shows
+an ascending trend, meaning that, generally, they take longer to complete
+the higher the number of sets of inputs they are given.
+
+Some tests appear to be faster than others that have less sets of inputs.
+This is predominantly happening becuase the benchmarks were run in a multithreaded
+environment, where context switches were happening.
+
+It is easy to say that the tabulation approach is by far the most reliable, albeit
+not the fastest. The speed of the greedy approach can be deceiving, suggesting it would be
+the best algorithm to solve the problem, but we have to take into consideration the fact
+that it does not provide the highest possible profit. Its solution is \textit{almost} correct.
+With all of that in mind, if we are not looking for the perfect combination of items, but
+for a quick and decent result, the greedy would be the best algorithm. As seen in the second graph,
+the backtracking approach is by far the slowest of them all, since it explores every possible combination of items
+(time complexity of $\mathcal{O}(2^n)$). Even though it is very slow, it is still better in terms of
+the correctness of the result than the greedy algorithm. The only point it actually excels in
+is its simplicity of the implementation, as it's a good starting point to understand the problem.
+
+With all of that being said, if we care about achieving a perfect result in a timely manner,
+we can conclude that the dynamic programming approach is the best one, and if we want a
+solution as fast as possible, although not perfect, the greedy algorithm is the way to go.
 %
 % ---- Bibliography ----
 %
@@ -549,19 +592,24 @@ solutions are needed for small tests.
 % \bibliography{mybibliography}
 %
 \begin{thebibliography}{8}
+
 \bibitem{ref_article1}
-\emph{Knapsack problem}, \url{https://en.wikipedia.org/wiki/Knapsack_problem} Accesat la [04/01/2025].
+\emph{Knapsack problem}, \url{https://en.wikipedia.org/wiki/Knapsack_problem} Accessed at [04/01/2025].
+
 \bibitem{ref_article2}
 Kayode Badiru: \emph{KNAPSACK PROBLEMS; METHODS, MODELS AND APPLICATIONS},
 \url{https://shareok.org/server/api/core/bitstreams/7bb97e22-4c5d-44b3-b756-74aba3fc1fd7/content} 
-Accesat la [05/01/2025]
+Accessed at [05/01/2025]
 
 \bibitem{ref_url1}
-LNCS Homepage, \url{http://www.springer.com/lncs}, Accesat la [04/01/2025]
+LNCS Homepage, \url{http://www.springer.com/lncs}, Accessed at [04/01/2025]
 
 \bibitem{ref_url2}
-A Phase Angle-Modulated Bat Algorithm with Application to Antenna Topology Optimization
-\url{https://www.researchgate.net/publication/349878676_A_Phase_Angle-Modulated_Bat_Algorithm_with_Application_to_Antenna_Topology_Optimization}, Accesat la [04/01/2025]
+\emph{A Phase Angle-Modulated Bat Algorithm with Application to Antenna Topology Optimization}
+\url{https://www.researchgate.net/publication/349878676_A_Phase_Angle-Modulated_Bat_Algorithm_with_Application_to_Antenna_Topology_Optimization}, Accessed at [04/01/2025]
+
+\bibitem{ref_url3}
+Geeks for Geeks, \emph{0/1 Knapsack Problem}, \url{https://www.geeksforgeeks.org/0-1-knapsack-problem-dp-10/}, Accessed at [05/01/2025]
 
 \end{thebibliography}
 \end{document}

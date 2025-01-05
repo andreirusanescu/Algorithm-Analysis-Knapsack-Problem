@@ -2,11 +2,12 @@
 % LLNCS macro package for Springer Computer Science proceedings;
 % Version 2.21 of 2022/01/12
 %
-\documentclass[runningheads]{llncs}
+\documentclass{llncs}
 %
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage[english]{babel}
+\usepackage{booktabs}
 \usepackage{url}
 \usepackage{hyperref}
 \usepackage{listings}
@@ -404,7 +405,7 @@ Complexity: The time complexity is $\mathcal{O}(2^N)$, making it impractical for
 Use Case: While not efficient for large inputs, backtracking can be useful in cases where exact 
 solutions are needed for small tests.
 
-\begin{table}[h]
+\begin{table}[ht]
     \centering
     \begin{tabular}{@{}lrrr@{}}
         \textbf{Benchmark DP} & \textbf{Time (ns)} & \textbf{CPU (ns)} & \textbf{Iterations} \\
@@ -444,7 +445,7 @@ solutions are needed for small tests.
 \end{table}
 \clearpage
 
-\begin{table}[h]
+\begin{table}[ht]
     \centering
     \begin{tabular}{@{}lrrr@{}}
         \toprule
@@ -486,7 +487,7 @@ solutions are needed for small tests.
 \end{table}
 \clearpage
 
-\begin{table}[h]
+\begin{table}[ht]
     \centering
     \begin{tabular}{@{}lrrr@{}}
         \toprule

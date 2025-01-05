@@ -149,16 +149,32 @@ inline std::vector<int> find_objects() {
 	return res;
 }
 \end{lstlisting}
-To begin with, the code is as fast as it can possibly be, while still being intelligible. I used inlining to suggest the compiler to paste this code where it is called from in order to reduce the potential overhead of pushing registers onto the stack. Furthermore, I used global variables that are initialized in the main procedure, due to the fact that these two functions are benchmarked using the Google Benchmark for C++. I wanted to make a separation between I/O (filling the data), allocations and initializations, and the true computing effort these functions bring.
-Each row in the matrix corresponds to an object, while each column represents a maximum weight capacity. The entry dp[i][w] denotes the maximum profit achievable using the first \bold{i} objects with a weight limit of \bold{w}. This value is determined by taking the maximum between two options: the sum of the current object's profit and the optimal profit from the remaining capacity, and the best profit obtained without including the current object. In essence, it captures the overall maximum profit for the given weight constraint, the last cell being the result. The function responsible for finding the objects that were put in the bag is doing reverse engineering on the matrix. If the profit obtained for the current row is different than the one above it, meaning the current object was used, so it is selected, otherwise, the current value is originating from an upper row.
+To begin with, the code is as fast as it can possibly be, while still being intelligible. I used inlining
+to suggest the compiler to paste this code where it is called from in order to reduce the potential overhead
+of pushing registers onto the stack. Furthermore, I used global variables that are initialized in the main
+procedure, due to the fact that these two functions are benchmarked using the Google Benchmark for C++. I
+wanted to make a separation between I/O (filling the data), allocations and initializations, and the true
+computing effort these functions bring.
+
+Each row in the matrix corresponds to an object, while each column represents a maximum weight capacity.
+The entry dp[i][w] denotes the maximum profit achievable using the first \textbf{i} objects with a weight
+limit of \textbf{w}. This value is determined by taking the maximum between two options: the sum of the
+current object's profit and the optimal profit from the remaining capacity, and the best profit obtained
+without including the current object. In essence, it captures the overall maximum profit for the given weight
+constraint, the last cell being the result. The function responsible for finding the objects that were put
+in the bag is doing reverse engineering on the matrix. If the profit obtained for the current row is different
+than the one above it, meaning the current object was used, so it is selected, otherwise, the current value
+is originating from an upper row.
 
 
 \subsubsection{Complexity Analysis}
 \paragraph{Time Complexity}
 The algorithm involves nested loops to fill the dynamic programming (DP) table:
-The outer loop runs from 1 to \texit{N} (the number of objects), resulting in \textit{N} iterations.
+The outer loop runs from 1 to \textit{N} (the number of objects), resulting in \textit{N} iterations.
 The inner loop runs from 1 to \textit{G} (the capacity of the knapsack), resulting in \textit{G} 
-iterations. For each combination of \textit{i} (object) and \textit{w} (weight), a constant amount of work is done, either updating the DP table or performing a comparison. Thus, the overall time complexity of the algorithm is $\mathcal{O}(N*G)$.
+iterations. For each combination of \textit{i} (object) and \textit{w} (weight), a constant amount
+of work is done, either updating the DP table or performing a comparison. Thus, the overall time
+complexity of the algorithm is $\mathcal{O}(N*G)$.
 
 \paragraph{Space Complexity}
 The space complexity is determined by the DP table, which is a two-dimensional vector of size 
@@ -169,7 +185,8 @@ complexity.
 
 \subsubsection{Advantages and Disadvantages}
 \paragraph{Advantages}
-The main advantages are the speed of execution, as the result can be obtained in a reasonable amount of time, and the avoidance of issues that might arise with recursion, such as stack overflow.
+The main advantages are the speed of execution, as the result can be obtained in a reasonable amount
+of time, and the avoidance of issues that might arise with recursion, such as stack overflow.
 
 \paragraph{Disadvantages}
 The main disadvantages include the large memory usage due to the DP table and the fact that the 
@@ -215,7 +232,7 @@ explore deeper. If not, it skips adding the object. The recursion stops when all
 
 The function iterates over all objects starting from a given \textbf{index}. For each object, it 
 adds its weight and value to the current totals, then dives deeper into the recursion. After 
-exploring that path, it removes the object’s weight and value to backtrack and explore other 
+exploring that path, it removes the object's weight and value to backtrack and explore other 
 possibilities.
 
 \subsubsection{Complexity Analysis}
@@ -290,7 +307,8 @@ For sorting, I used struct fcmp to provide a sorting logic for the sort() functi
 
 \subsubsection{Complexity Analysis}
 \paragraph{Time Complexity}
-The time complexity of the algorithm is $\mathcal{O}(NlogN)$ due to the sorting step, where $N$ is the number of items. After sorting, the algorithm iterates through the list of items, which takes $\mathcal{O}(N)$.
+The time complexity of the algorithm is $\mathcal{O}(NlogN)$ due to the sorting step, where $N$ is
+the number of items. After sorting, the algorithm iterates through the list of items, which takes $\mathcal{O}(N)$.
 time. Thus, the overall time complexity is dominated by the sorting step, resulting in 
 $\mathcal{O}(NlogN)$.
 
@@ -316,7 +334,7 @@ algorithm performs well, but it may underperform in other cases.
 The tests are 30 in number and were partly generated using a python script that generated tests with
 sizes between 20 and 100 and weights randomly chosen between 500 and 1000. The other part is made of
 4 tests I chose from an online resource I cited in the bibliography. To run the benchmark, you should
-execute the $\textt{run\_benchmarks.sh}$ script and it will write the results in the 
+execute the $\textit{run\_benchmarks.sh}$ script and it will write the results in the 
 tests/benchmarks folder.
 For the benchmark test I used my personal laptop with an AMD Ryzen 7 3750H with Radeon Vega Mobile
 Gfx 2.30 GHz, 16.0 GB of RAM (13.9 GB usable), running Ubuntu 22.04. The tests where run using the
@@ -338,7 +356,7 @@ in, on the Turbo mode from Ubuntu.
 %
 \begin{thebibliography}{8}
 \bibitem{ref_article1}
-Pavel, G.-I.: \emph{Knapsack problem}, \url{https://en.wikipedia.org/wiki/Knapsack_problem} Accesat la [04/01/2025].
+\emph{Knapsack problem}, \url{https://en.wikipedia.org/wiki/Knapsack_problem} Accesat la [04/01/2025].
 \bibitem{ref_article2}
 Kayode Badiru: \emph{KNAPSACK PROBLEMS; METHODS, MODELS AND APPLICATIONS},
 \url{https://shareok.org/server/api/core/bitstreams/7bb97e22-4c5d-44b3-b756-74aba3fc1fd7/content} 

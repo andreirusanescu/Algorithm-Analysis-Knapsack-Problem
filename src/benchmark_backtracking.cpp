@@ -7,12 +7,12 @@
 /*********************** Backtracking approach ***********************/
 
 int N, G;
-int maxW, maxx, size;
+int maxx;
 std::vector<int> weights, values;
 std::vector<int> selection, current_selection;
 
 int knapsack(int index, int curr_weight, int curr_profit) {
-	if (index == size) {
+	if (index == N) {
 		if (curr_profit > maxx) {
 			maxx = curr_profit;
 			selection = current_selection;
@@ -20,7 +20,7 @@ int knapsack(int index, int curr_weight, int curr_profit) {
 		return maxx;
 	}
 
-	if (curr_weight + weights[index] <= maxW) {
+	if (curr_weight + weights[index] <= G) {
 		current_selection.push_back(index + 1);
 		maxx = std::max(maxx, knapsack(index + 1, curr_weight + weights[index], curr_profit + values[index]));
 		current_selection.pop_back();
@@ -49,9 +49,6 @@ int main(int argc, char **argv) {
 
 	weights.resize(N);
 	values.resize(N);
-
-	maxW = G;
-	size = N;
 
 	for (int i = 0; i < N; ++i)
 		fin >> weights[i] >> values[i];

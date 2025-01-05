@@ -4,11 +4,10 @@
 #include <algorithm>
 #include <benchmark/benchmark.h>
 
+/*********************** Greedy approach ***********************/
 int N, G;
 std::vector<std::vector<int>> pairs;
 std::vector<int> selection;
-
-/*********************** Greedy approach ***********************/
 
 struct fcmp {
 	bool operator()(const std::vector<int> &a, const std::vector<int> &b) {

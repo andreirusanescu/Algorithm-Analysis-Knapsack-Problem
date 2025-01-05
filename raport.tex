@@ -42,8 +42,9 @@
 % an abbreviated paper title here
 %
 \author{Andrei RUSĂNESCU,
- Gabriel-Ioan PAVEL,
-Amir FALLAH-MIRZAEI}
+Gabriel-Ioan PAVEL,
+Amir FALLAH-MIRZAEI,
+323CC}
 %
 \institute{University Politehnica of Bucharest}
 %
@@ -177,6 +178,7 @@ inline std::vector<int> find_objects() {
 	return res;
 }
 \end{lstlisting}
+
 To begin with, the code is as fast as it can possibly be, while still being intelligible. I used inlining
 to suggest the compiler to paste this code where it is called from in order to reduce the potential overhead
 of pushing registers onto the stack. Furthermore, I used global variables that are initialized in the main

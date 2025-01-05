@@ -316,13 +316,173 @@ algorithm performs well, but it may underperform in other cases.
 The tests are 30 in number and were partly generated using a python script that generated tests with
 sizes between 20 and 100 and weights randomly chosen between 500 and 1000. The other part is made of
 4 tests I chose from an online resource I cited in the bibliography. To run the benchmark, you should
-execute the $\textt{run\_benchmarks.sh}$ script and it will write the results in the 
+execute the $run\_benchmarks.sh$ script and it will write the results in the 
 tests/benchmarks folder.
 For the benchmark test I used my personal laptop with an AMD Ryzen 7 3750H with Radeon Vega Mobile
 Gfx 2.30 GHz, 16.0 GB of RAM (13.9 GB usable), running Ubuntu 22.04. The tests where run using the
 gcc compiler, version gcc version 11.4.0 with the flags: -std=c++11 -isystem utils/benchmark/include 
 -L../utils/benchmark/build/src -lbenchmark -lpthread. All the tests where run with the laptop plugged
 in, on the Turbo mode from Ubuntu.
+
+The results are summarized in the tables below, presenting the performance of each algorithm. The 
+number of \textit{iterations} for each benchmark test is determined automatically by the 
+benchmarking tool, which ensures that the functions are called a sufficient number of times to 
+provide reliable measurements. Each line corresponds to a test. The tests are located in the tests/input folder.
+
+\subsection{Performance Analysis}
+1. \textbf{Greedy} Algorithm:
+Speed: The Greedy algorithm consistently outperforms the other two in terms of speed. This
+efficiency is due to its simplistic approach, which just sorts the items and then fills the bag.
+Complexity: The Greedy algorithm operates with a time complexity of $\mathcal{O}(NlogN)$. However, it does not guarantee the optimal solution for the problem.
+Use Case: Best suited for scenarios where speed is crucial, and the problem constraints or inputs 
+naturally lend themselves to a near-optimal solution, close to the correct one.
+\newline
+2. \textbf{Dynamic Programming} (DP):
+Speed: The DP approach shows moderate performance, sitting between the Greedy and Backtracking 
+methods. This is expected given its polynomial time complexity.
+Complexity: With a time complexity of $\mathcal{O}(N*W)$,  where N is the number of items and 
+W is the maximum weight capacity, DP provides a balance between optimality and efficiency. It 
+ensures the optimal solution by considering all possible combinations of items up to the maximum
+weight.
+Use Case: Ideal for scenarios where an exact solution is necessary.
+\newline
+3. \textbf{Backtracking} Algorithm:
+Speed: Backtracking is significantly slower, particularly as the input size increases. This is
+evident from the exponential increase in execution time as the value of N grows.
+Complexity: The time complexity is $\mathcal{O}(2^N)$, making it impractical for large tests.
+Use Case: While not efficient for large inputs, backtracking can be useful in cases where exact 
+solutions are needed for small tests.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{@{}lrrr@{}}
+        \textbf{Benchmark DP} & \textbf{Time (ns)} & \textbf{CPU (ns)} & \textbf{Iterations} \\
+        knapsack\_handler\_tabulation & 397274 & 397277 & 1851 \\
+        knapsack\_handler\_tabulation & 451001 & 450761 & 1728 \\
+        knapsack\_handler\_tabulation & 381943 & 381887 & 1507 \\
+        knapsack\_handler\_tabulation & 489491 & 489492 & 1326 \\
+        knapsack\_handler\_tabulation & 493156 & 493152 & 1298 \\
+        knapsack\_handler\_tabulation & 435406 & 435404 & 1636 \\
+        knapsack\_handler\_tabulation & 650042 & 650031 & 917 \\
+        knapsack\_handler\_tabulation & 532384 & 532373 & 1252 \\
+        knapsack\_handler\_tabulation & 516264 & 516259 & 1470 \\
+        knapsack\_handler\_tabulation & 562368 & 562380 & 1237 \\
+        knapsack\_handler\_tabulation & 883800 & 883352 & 735 \\
+        knapsack\_handler\_tabulation & 473825 & 473815 & 1522 \\
+        knapsack\_handler\_tabulation & 701742 & 701745 & 875 \\
+        knapsack\_handler\_tabulation & 639519 & 639524 & 1058 \\
+        knapsack\_handler\_tabulation & 962106 & 962057 & 658 \\
+        knapsack\_handler\_tabulation & 929154 & 929151 & 827 \\
+        knapsack\_handler\_tabulation & 698738 & 698732 & 1040 \\
+        knapsack\_handler\_tabulation & 793952 & 793950 & 869 \\
+        knapsack\_handler\_tabulation & 902861 & 902869 & 714 \\
+        knapsack\_handler\_tabulation & 624316 & 624326 & 1126 \\
+        knapsack\_handler\_tabulation & 1089568 & 1089519 & 594 \\
+        knapsack\_handler\_tabulation & 843631 & 843624 & 876 \\
+        knapsack\_handler\_tabulation & 884242 & 884247 & 717 \\
+        knapsack\_handler\_tabulation & 729051 & 728534 & 866 \\
+        knapsack\_handler\_tabulation & 1303246 & 1303232 & 550 \\
+        knapsack\_handler\_tabulation & 1288841 & 1288492 & 539 \\
+        knapsack\_handler\_tabulation & 741127 & 741112 & 834 \\
+        knapsack\_handler\_tabulation & 1092041 & 1092014 & 606 \\
+        knapsack\_handler\_tabulation & 399632 & 399628 & 1952 \\
+        knapsack\_handler\_tabulation & 294332 & 294297 & 2375 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Benchmark Results for knapsack\_handler\_tabulation}
+\end{table}
+\clearpage
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{@{}lrrr@{}}
+        \toprule
+        \textbf{Benchmark Backtracking} & \textbf{Time (ns)} & \textbf{CPU (ns)} & \textbf{Iterations} \\
+        \midrule
+        knapsack\_handler\_backtracking & 422676 & 422635 & 1644 \\
+        knapsack\_handler\_backtracking & 1429100 & 1429023 & 483 \\
+        knapsack\_handler\_backtracking & 6927283 & 6925875 & 103 \\
+        knapsack\_handler\_backtracking & 11765128 & 11765176 & 58 \\
+        knapsack\_handler\_backtracking & 6308162 & 6308182 & 111 \\
+        knapsack\_handler\_backtracking & 2075346 & 2075331 & 334 \\
+        knapsack\_handler\_backtracking & 23259420 & 23259193 & 30 \\
+        knapsack\_handler\_backtracking & 2290172 & 2290153 & 311 \\
+        knapsack\_handler\_backtracking & 31302150 & 31301750 & 24 \\
+        knapsack\_handler\_backtracking & 163084480 & 163085075 & 4 \\
+        knapsack\_handler\_backtracking & 559927626 & 559929100 & 1 \\
+        knapsack\_handler\_backtracking & 1736294 & 1736248 & 410 \\
+        knapsack\_handler\_backtracking & 18161163 & 18160888 & 40 \\
+        knapsack\_handler\_backtracking & 89581115 & 89579544 & 9 \\
+        knapsack\_handler\_backtracking & 3263062506 & 3263021100 & 1 \\
+        knapsack\_handler\_backtracking & 3040190737 & 3040169900 & 1 \\
+        knapsack\_handler\_backtracking & 211758763 & 211757767 & 3 \\
+        knapsack\_handler\_backtracking & 624621926 & 624091200 & 1 \\
+        knapsack\_handler\_backtracking & 1359326241 & 1359322300 & 1 \\
+        knapsack\_handler\_backtracking & 72809409 & 72808410 & 10 \\
+        knapsack\_handler\_backtracking & 6523479592 & 6523417800 & 1 \\
+        knapsack\_handler\_backtracking & 342279551 & 342120750 & 2 \\
+        knapsack\_handler\_backtracking & 1379948451 & 1379898500 & 1 \\
+        knapsack\_handler\_backtracking & 125158735 & 125157260 & 5 \\
+        knapsack\_handler\_backtracking & 5962969626 & 5962870200 & 1 \\
+        knapsack\_handler\_backtracking & 34420000000 & 34420000000 & 1 \\
+        knapsack\_handler\_backtracking & 123940051 & 123939083 & 6 \\
+        knapsack\_handler\_backtracking & 31164000000 & 31163000000 & 1 \\
+        knapsack\_handler\_backtracking & 47379010 & 47379250 & 14 \\
+        knapsack\_handler\_backtracking & 2652311691 & 2652282900 & 1 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Benchmark Results for knapsack\_handler\_backtracking}
+\end{table}
+\clearpage
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{@{}lrrr@{}}
+        \toprule
+        \textbf{Benchmark Greedy} & \textbf{Time (ns)} & \textbf{CPU (ns)} & \textbf{Iterations} \\
+        \midrule
+        knapsack\_handler\_greedy & 7195 & 7193 & 93873 \\
+        knapsack\_handler\_greedy & 8058 & 8058 & 86586 \\
+        knapsack\_handler\_greedy & 9510 & 9510 & 77823 \\
+        knapsack\_handler\_greedy & 9905 & 9905 & 64998 \\
+        knapsack\_handler\_greedy & 9600 & 9600 & 72680 \\
+        knapsack\_handler\_greedy & 7909 & 7909 & 89973 \\
+        knapsack\_handler\_greedy & 13484 & 13484 & 52825 \\
+        knapsack\_handler\_greedy & 15715 & 15715 & 48553 \\
+        knapsack\_handler\_greedy & 16990 & 16990 & 45755 \\
+        knapsack\_handler\_greedy & 16546 & 16545 & 42428 \\
+        knapsack\_handler\_greedy & 18386 & 18366 & 34185 \\
+        knapsack\_handler\_greedy & 17087 & 17087 & 39253 \\
+        knapsack\_handler\_greedy & 18532 & 18528 & 38958 \\
+        knapsack\_handler\_greedy & 18495 & 18495 & 38447 \\
+        knapsack\_handler\_greedy & 20672 & 20671 & 32829 \\
+        knapsack\_handler\_greedy & 21150 & 21148 & 33215 \\
+        knapsack\_handler\_greedy & 21175 & 21175 & 33052 \\
+        knapsack\_handler\_greedy & 21954 & 21954 & 28701 \\
+        knapsack\_handler\_greedy & 23307 & 23307 & 34267 \\
+        knapsack\_handler\_greedy & 19612 & 19612 & 29183 \\
+        knapsack\_handler\_greedy & 21941 & 21938 & 36639 \\
+        knapsack\_handler\_greedy & 26130 & 26130 & 26768 \\
+        knapsack\_handler\_greedy & 28771 & 28741 & 24319 \\
+        knapsack\_handler\_greedy & 30160 & 30160 & 21867 \\
+        knapsack\_handler\_greedy & 30992 & 30991 & 22807 \\
+        knapsack\_handler\_greedy & 31482 & 31482 & 21237 \\
+        knapsack\_handler\_greedy & 34720 & 34719 & 21059 \\
+        knapsack\_handler\_greedy & 34224 & 34224 & 20451 \\
+        knapsack\_handler\_greedy & 7058 & 7058 & 90852 \\
+        knapsack\_handler\_greedy & 10121 & 10121 & 71612 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Benchmark Results for knapsack\_handler\_greedy}
+\end{table}
+\clearpage
+
+
+
+
+
+
+
 
 \section{Conclusions}
 %TODO: Gebi

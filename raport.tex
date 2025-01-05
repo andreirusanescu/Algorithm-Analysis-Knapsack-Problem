@@ -71,34 +71,53 @@ writings dating as far back as 1897.
 
 % Andrei:
 \section{Practical Applications}
-The Knapsack Problem and its variations have a multitude of real life applications including financial modeling, production and inventory management systems, stratified sampling, design of queuing network models in manufacturing, and control of traffic overload in telecommunication systems.
+The Knapsack Problem and its variations have a multitude of real life applications
+including financial modeling, production and inventory management systems, stratified
+sampling, design of queuing network models in manufacturing, and control of traffic
+overload in telecommunication systems.
 
 \subsection*{1. Financial Modeling}
 \begin{itemize}
-    \item \textbf{Investment Portfolio Selection}: In finance, the Knapsack Problem is used to select a combination of investment assets that maximize returns while staying within a budget or risk tolerance. This involves balancing the trade-offs between different financial instruments like stocks, bonds, and derivatives.
-    \item \textbf{Capital Budgeting}: Companies use this problem to decide how to allocate limited capital resources among various potential projects to maximize returns.
+    \item \textbf{Investment Portfolio Selection}: In finance, the Knapsack Problem
+	is used to select a combination of investment assets that maximize returns while
+	staying within a budget or risk tolerance. This involves balancing the trade-offs
+	between different financial instruments like stocks, bonds, and derivatives.
+    \item \textbf{Capital Budgeting}: Companies use this problem to decide how to
+	allocate limited capital resources among various potential projects to maximize returns.
 \end{itemize}
 
 \subsection*{2. Production and Inventory Management Systems}
 \begin{itemize}
-    \item \textbf{Optimal Resource Allocation}: In production, the problem helps in determining the best way to allocate limited resources like raw materials or machinery to different products to maximize output or profit.
-    \item \textbf{Inventory Control}: It is applied to decide which items to stock in limited warehouse space, ensuring maximum profitability or utility while minimizing costs.
+    \item \textbf{Optimal Resource Allocation}: In production, the problem helps in
+	determining the best way to allocate limited resources like raw materials or machinery
+	to different products to maximize output or profit.
+    \item \textbf{Inventory Control}: It is applied to decide which items to stock in
+	limited warehouse space, ensuring maximum profitability or utility while minimizing costs.
 \end{itemize}
 
 \subsection*{3. Stratified Sampling}
 \begin{itemize}
-    \item \textbf{Survey Design}: In statistics, the Knapsack Problem helps in stratified sampling by selecting a sample that represents different strata or subgroups of a population in a cost-effective way, ensuring that the sample is both diverse and within budget constraints.
+    \item \textbf{Survey Design}: In statistics, the Knapsack Problem helps in stratified
+	sampling by selecting a sample that represents different strata or subgroups of a population
+	in a cost-effective way, ensuring that the sample is both diverse and within budget constraints.
 \end{itemize}
 
 \subsection*{4. Design of Queuing Network Models in Manufacturing}
 \begin{itemize}
-    \item \textbf{Production Line Optimization}: In manufacturing, the problem aids in the design and optimization of queuing networks, where the goal is to minimize waiting times and costs while maximizing throughput. This involves selecting the right combination of machines, processes, and workflows within budgetary and space constraints.
+    \item \textbf{Production Line Optimization}: In manufacturing, the problem aids in the design
+	and optimization of queuing networks, where the goal is to minimize waiting times and costs
+	while maximizing throughput. This involves selecting the right combination of machines, processes
+	and workflows within budgetary and space constraints.
 \end{itemize}
 
 \subsection*{5. Control of Traffic Overload in Telecommunication Systems}
 \begin{itemize}
-    \item \textbf{Bandwidth Allocation}: The Knapsack Problem is used to allocate limited bandwidth resources to various communication channels or services to maximize overall network efficiency and quality of service.
-    \item \textbf{Data Packet Prioritization}: It helps in determining which data packets should be transmitted first based on their priority and the available network capacity to prevent congestion and optimize network performance.
+    \item \textbf{Bandwidth Allocation}: The Knapsack Problem is used to allocate limited bandwidth
+	resources to various communication channels or services to maximize overall network efficiency
+	and quality of service.
+    \item \textbf{Data Packet Prioritization}: It helps in determining which data packets should
+	be transmitted first based on their priority and the available network capacity to prevent
+	congestion and optimize network performance.
 \end{itemize}
 
 %TODO: Amir:
@@ -110,8 +129,17 @@ The Knapsack Problem and its variations have a multitude of real life applicatio
 There are two approaches to solve this problem using dynamic programming:
 using a memoization table (top-down) or tabulation (bottom-up). 
 \begin{itemize}
-    \item \textbf{Memoization}: Using recursion to solve the Knapsack Problem results in an exponential time complexity. This is due to the fact that the algorithm recomputes functions that have already been processed multiple times. Instead of recomputing these values, we can utilize a \textit{memoization} table to store the results of these functions. By doing so, we can significantly reduce the time complexity and make the algorithm more efficient. Memoization involves storing the results of previously computed subproblems in a table (often a two-dimensional array).
-    \item \textbf{Tabulation}: This is the approach I chose to implement in code, because it is usually faster then the memoization one owing to its iterative nature. Despite calculating all the combinations of objects in the knapsack, the tabulation method is known as "Bottom-Up" since it builds the solution incrementally from the smallest subproblems to the overall problem. Tabulation involves filling up a table (typically a two-dimensional array, even though it can be done using a one-dimensional array). Each entry in the table represents the solution to a subproblem, and the solution to the overall problem is derived from these subproblem solutions.
+    \item \textbf{Memoization}: Using recursion to solve the Knapsack Problem results in an exponential
+	time complexity. This is due to the fact that the algorithm recomputes functions that have already
+	been processed multiple times. Instead of recomputing these values, we can utilize a \textit{memoization}
+	table to store the results of these functions. By doing so, we can significantly reduce the time complexity and make the algorithm more efficient. Memoization involves storing the results of previously computed subproblems in a table (often a two-dimensional array).
+    \item \textbf{Tabulation}: This is the approach I chose to implement in code, because it is usually
+	faster then the memoization one owing to its iterative nature. Despite calculating all the
+	combinations of objects in the knapsack, the tabulation method is known as "Bottom-Up" since
+	it builds the solution incrementally from the smallest subproblems to the overall problem.
+	Tabulation involves filling up a table (typically a two-dimensional array, even though it can be
+	done using a one-dimensional array). Each entry in the table represents the solution to a subproblem,
+	and the solution to the overall problem is derived from these subproblem solutions.
 \end{itemize}
 
 \begin{lstlisting}
@@ -228,7 +256,8 @@ int knapsack(int index, int curr_weight, int curr_profit) {
 
 For each function call, the algorithm checks if the current object can be added without exceeding 
 the maximum weight. If it can, the function updates the current maximum profit and continues to 
-explore deeper. If not, it skips adding the object. The recursion stops when all combinations of objects have been considered.
+explore deeper. If not, it skips adding the object. The recursion stops when all combinations of
+objects have been considered.
 
 The function iterates over all objects starting from a given \textbf{index}. For each object, it 
 adds its weight and value to the current totals, then dives deeper into the recursion. After 
@@ -239,7 +268,8 @@ possibilities.
 \paragraph{Time Complexity}
 The main factor contributing to the time complexity is the exhaustive nature of the algorithm, it 
 explores every possible subset of objects. This results in \( 2^n \) iterations, as each object can 
-either be included or excluded. Therefore, the time complexity is $\mathcal{O}(2^n)$, which grows exponentially with the number of objects.
+either be included or excluded. Therefore, the time complexity is $\mathcal{O}(2^n)$, which grows
+exponentially with the number of objects.
 
 \paragraph{Space Complexity}
 The space complexity is driven by the depth of the recursion stack. With n objects to check, the 
@@ -336,6 +366,7 @@ sizes between 20 and 100 and weights randomly chosen between 500 and 1000. The o
 4 tests I chose from an online resource I cited in the bibliography. To run the benchmark, you should
 execute the $\textit{run\_benchmarks.sh}$ script and it will write the results in the 
 tests/benchmarks folder.
+
 For the benchmark test I used my personal laptop with an AMD Ryzen 7 3750H with Radeon Vega Mobile
 Gfx 2.30 GHz, 16.0 GB of RAM (13.9 GB usable), running Ubuntu 22.04. The tests where run using the
 gcc compiler, version gcc version 11.4.0 with the flags: -std=c++11 -isystem utils/benchmark/include 

@@ -2,11 +2,12 @@
 % LLNCS macro package for Springer Computer Science proceedings;
 % Version 2.21 of 2022/01/12
 %
-\documentclass[runningheads]{llncs}
+\documentclass{llncs}
 %
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage[english]{babel}
+\usepackage{booktabs}
 \usepackage{url}
 \usepackage{hyperref}
 \usepackage{listings}
@@ -42,8 +43,9 @@
 % an abbreviated paper title here
 %
 \author{Andrei RUSĂNESCU,
- Gabriel-Ioan PAVEL,
-Amir FALLAH-MIRZAEI}
+Gabriel-Ioan PAVEL,
+Amir FALLAH-MIRZAEI,
+323CC}
 %
 \institute{University Politehnica of Bucharest}
 %
@@ -71,34 +73,53 @@ writings dating as far back as 1897.
 
 % Andrei:
 \section{Practical Applications}
-The Knapsack Problem and its variations have a multitude of real life applications including financial modeling, production and inventory management systems, stratified sampling, design of queuing network models in manufacturing, and control of traffic overload in telecommunication systems.
+The Knapsack Problem and its variations have a multitude of real life applications
+including financial modeling, production and inventory management systems, stratified
+sampling, design of queuing network models in manufacturing, and control of traffic
+overload in telecommunication systems.
 
 \subsection*{1. Financial Modeling}
 \begin{itemize}
-    \item \textbf{Investment Portfolio Selection}: In finance, the Knapsack Problem is used to select a combination of investment assets that maximize returns while staying within a budget or risk tolerance. This involves balancing the trade-offs between different financial instruments like stocks, bonds, and derivatives.
-    \item \textbf{Capital Budgeting}: Companies use this problem to decide how to allocate limited capital resources among various potential projects to maximize returns.
+    \item \textbf{Investment Portfolio Selection}: In finance, the Knapsack Problem
+	is used to select a combination of investment assets that maximize returns while
+	staying within a budget or risk tolerance. This involves balancing the trade-offs
+	between different financial instruments like stocks, bonds, and derivatives.
+    \item \textbf{Capital Budgeting}: Companies use this problem to decide how to
+	allocate limited capital resources among various potential projects to maximize returns.
 \end{itemize}
 
 \subsection*{2. Production and Inventory Management Systems}
 \begin{itemize}
-    \item \textbf{Optimal Resource Allocation}: In production, the problem helps in determining the best way to allocate limited resources like raw materials or machinery to different products to maximize output or profit.
-    \item \textbf{Inventory Control}: It is applied to decide which items to stock in limited warehouse space, ensuring maximum profitability or utility while minimizing costs.
+    \item \textbf{Optimal Resource Allocation}: In production, the problem helps in
+	determining the best way to allocate limited resources like raw materials or machinery
+	to different products to maximize output or profit.
+    \item \textbf{Inventory Control}: It is applied to decide which items to stock in
+	limited warehouse space, ensuring maximum profitability or utility while minimizing costs.
 \end{itemize}
 
 \subsection*{3. Stratified Sampling}
 \begin{itemize}
-    \item \textbf{Survey Design}: In statistics, the Knapsack Problem helps in stratified sampling by selecting a sample that represents different strata or subgroups of a population in a cost-effective way, ensuring that the sample is both diverse and within budget constraints.
+    \item \textbf{Survey Design}: In statistics, the Knapsack Problem helps in stratified
+	sampling by selecting a sample that represents different strata or subgroups of a population
+	in a cost-effective way, ensuring that the sample is both diverse and within budget constraints.
 \end{itemize}
 
 \subsection*{4. Design of Queuing Network Models in Manufacturing}
 \begin{itemize}
-    \item \textbf{Production Line Optimization}: In manufacturing, the problem aids in the design and optimization of queuing networks, where the goal is to minimize waiting times and costs while maximizing throughput. This involves selecting the right combination of machines, processes, and workflows within budgetary and space constraints.
+    \item \textbf{Production Line Optimization}: In manufacturing, the problem aids in the design
+	and optimization of queuing networks, where the goal is to minimize waiting times and costs
+	while maximizing throughput. This involves selecting the right combination of machines, processes
+	and workflows within budgetary and space constraints.
 \end{itemize}
 
 \subsection*{5. Control of Traffic Overload in Telecommunication Systems}
 \begin{itemize}
-    \item \textbf{Bandwidth Allocation}: The Knapsack Problem is used to allocate limited bandwidth resources to various communication channels or services to maximize overall network efficiency and quality of service.
-    \item \textbf{Data Packet Prioritization}: It helps in determining which data packets should be transmitted first based on their priority and the available network capacity to prevent congestion and optimize network performance.
+    \item \textbf{Bandwidth Allocation}: The Knapsack Problem is used to allocate limited bandwidth
+	resources to various communication channels or services to maximize overall network efficiency
+	and quality of service.
+    \item \textbf{Data Packet Prioritization}: It helps in determining which data packets should
+	be transmitted first based on their priority and the available network capacity to prevent
+	congestion and optimize network performance.
 \end{itemize}
 
 %TODO: Amir:
@@ -110,8 +131,17 @@ The Knapsack Problem and its variations have a multitude of real life applicatio
 There are two approaches to solve this problem using dynamic programming:
 using a memoization table (top-down) or tabulation (bottom-up). 
 \begin{itemize}
-    \item \textbf{Memoization}: Using recursion to solve the Knapsack Problem results in an exponential time complexity. This is due to the fact that the algorithm recomputes functions that have already been processed multiple times. Instead of recomputing these values, we can utilize a \textit{memoization} table to store the results of these functions. By doing so, we can significantly reduce the time complexity and make the algorithm more efficient. Memoization involves storing the results of previously computed subproblems in a table (often a two-dimensional array).
-    \item \textbf{Tabulation}: This is the approach I chose to implement in code, because it is usually faster then the memoization one owing to its iterative nature. Despite calculating all the combinations of objects in the knapsack, the tabulation method is known as "Bottom-Up" since it builds the solution incrementally from the smallest subproblems to the overall problem. Tabulation involves filling up a table (typically a two-dimensional array, even though it can be done using a one-dimensional array). Each entry in the table represents the solution to a subproblem, and the solution to the overall problem is derived from these subproblem solutions.
+    \item \textbf{Memoization}: Using recursion to solve the Knapsack Problem results in an exponential
+	time complexity. This is due to the fact that the algorithm recomputes functions that have already
+	been processed multiple times. Instead of recomputing these values, we can utilize a \textit{memoization}
+	table to store the results of these functions. By doing so, we can significantly reduce the time complexity and make the algorithm more efficient. Memoization involves storing the results of previously computed subproblems in a table (often a two-dimensional array).
+    \item \textbf{Tabulation}: This is the approach I chose to implement in code, because it is usually
+	faster then the memoization one owing to its iterative nature. Despite calculating all the
+	combinations of objects in the knapsack, the tabulation method is known as "Bottom-Up" since
+	it builds the solution incrementally from the smallest subproblems to the overall problem.
+	Tabulation involves filling up a table (typically a two-dimensional array, even though it can be
+	done using a one-dimensional array). Each entry in the table represents the solution to a subproblem,
+	and the solution to the overall problem is derived from these subproblem solutions.
 \end{itemize}
 
 \begin{lstlisting}
@@ -149,16 +179,33 @@ inline std::vector<int> find_objects() {
 	return res;
 }
 \end{lstlisting}
-To begin with, the code is as fast as it can possibly be, while still being intelligible. I used inlining to suggest the compiler to paste this code where it is called from in order to reduce the potential overhead of pushing registers onto the stack. Furthermore, I used global variables that are initialized in the main procedure, due to the fact that these two functions are benchmarked using the Google Benchmark for C++. I wanted to make a separation between I/O (filling the data), allocations and initializations, and the true computing effort these functions bring.
-Each row in the matrix corresponds to an object, while each column represents a maximum weight capacity. The entry dp[i][w] denotes the maximum profit achievable using the first \bold{i} objects with a weight limit of \bold{w}. This value is determined by taking the maximum between two options: the sum of the current object's profit and the optimal profit from the remaining capacity, and the best profit obtained without including the current object. In essence, it captures the overall maximum profit for the given weight constraint, the last cell being the result. The function responsible for finding the objects that were put in the bag is doing reverse engineering on the matrix. If the profit obtained for the current row is different than the one above it, meaning the current object was used, so it is selected, otherwise, the current value is originating from an upper row.
+
+To begin with, the code is as fast as it can possibly be, while still being intelligible. I used inlining
+to suggest the compiler to paste this code where it is called from in order to reduce the potential overhead
+of pushing registers onto the stack. Furthermore, I used global variables that are initialized in the main
+procedure, due to the fact that these two functions are benchmarked using the Google Benchmark for C++. I
+wanted to make a separation between I/O (filling the data), allocations and initializations, and the true
+computing effort these functions bring.
+
+Each row in the matrix corresponds to an object, while each column represents a maximum weight capacity.
+The entry dp[i][w] denotes the maximum profit achievable using the first \textbf{i} objects with a weight
+limit of \textbf{w}. This value is determined by taking the maximum between two options: the sum of the
+current object's profit and the optimal profit from the remaining capacity, and the best profit obtained
+without including the current object. In essence, it captures the overall maximum profit for the given weight
+constraint, the last cell being the result. The function responsible for finding the objects that were put
+in the bag is doing reverse engineering on the matrix. If the profit obtained for the current row is different
+than the one above it, meaning the current object was used, so it is selected, otherwise, the current value
+is originating from an upper row.
 
 
 \subsubsection{Complexity Analysis}
 \paragraph{Time Complexity}
 The algorithm involves nested loops to fill the dynamic programming (DP) table:
-The outer loop runs from 1 to \texit{N} (the number of objects), resulting in \textit{N} iterations.
+The outer loop runs from 1 to \textit{N} (the number of objects), resulting in \textit{N} iterations.
 The inner loop runs from 1 to \textit{G} (the capacity of the knapsack), resulting in \textit{G} 
-iterations. For each combination of \textit{i} (object) and \textit{w} (weight), a constant amount of work is done, either updating the DP table or performing a comparison. Thus, the overall time complexity of the algorithm is $\mathcal{O}(N*G)$.
+iterations. For each combination of \textit{i} (object) and \textit{w} (weight), a constant amount
+of work is done, either updating the DP table or performing a comparison. Thus, the overall time
+complexity of the algorithm is $\mathcal{O}(N*G)$.
 
 \paragraph{Space Complexity}
 The space complexity is determined by the DP table, which is a two-dimensional vector of size 
@@ -169,7 +216,8 @@ complexity.
 
 \subsubsection{Advantages and Disadvantages}
 \paragraph{Advantages}
-The main advantages are the speed of execution, as the result can be obtained in a reasonable amount of time, and the avoidance of issues that might arise with recursion, such as stack overflow.
+The main advantages are the speed of execution, as the result can be obtained in a reasonable amount
+of time, and the avoidance of issues that might arise with recursion, such as stack overflow.
 
 \paragraph{Disadvantages}
 The main disadvantages include the large memory usage due to the DP table and the fact that the 
@@ -211,18 +259,20 @@ int knapsack(int index, int curr_weight, int curr_profit) {
 
 For each function call, the algorithm checks if the current object can be added without exceeding 
 the maximum weight. If it can, the function updates the current maximum profit and continues to 
-explore deeper. If not, it skips adding the object. The recursion stops when all combinations of objects have been considered.
+explore deeper. If not, it skips adding the object. The recursion stops when all combinations of
+objects have been considered.
 
 The function iterates over all objects starting from a given \textbf{index}. For each object, it 
 adds its weight and value to the current totals, then dives deeper into the recursion. After 
-exploring that path, it removes the object’s weight and value to backtrack and explore other 
+exploring that path, it removes the object's weight and value to backtrack and explore other 
 possibilities.
 
 \subsubsection{Complexity Analysis}
 \paragraph{Time Complexity}
 The main factor contributing to the time complexity is the exhaustive nature of the algorithm, it 
 explores every possible subset of objects. This results in \( 2^n \) iterations, as each object can 
-either be included or excluded. Therefore, the time complexity is $\mathcal{O}(2^n)$, which grows exponentially with the number of objects.
+either be included or excluded. Therefore, the time complexity is $\mathcal{O}(2^n)$, which grows
+exponentially with the number of objects.
 
 \paragraph{Space Complexity}
 The space complexity is driven by the depth of the recursion stack. With n objects to check, the 
@@ -290,7 +340,8 @@ For sorting, I used struct fcmp to provide a sorting logic for the sort() functi
 
 \subsubsection{Complexity Analysis}
 \paragraph{Time Complexity}
-The time complexity of the algorithm is $\mathcal{O}(NlogN)$ due to the sorting step, where $N$ is the number of items. After sorting, the algorithm iterates through the list of items, which takes $\mathcal{O}(N)$.
+The time complexity of the algorithm is $\mathcal{O}(NlogN)$ due to the sorting step, where $N$ is
+the number of items. After sorting, the algorithm iterates through the list of items, which takes $\mathcal{O}(N)$.
 time. Thus, the overall time complexity is dominated by the sorting step, resulting in 
 $\mathcal{O}(NlogN)$.
 
@@ -318,6 +369,7 @@ sizes between 20 and 100 and weights randomly chosen between 500 and 1000. The o
 4 tests I chose from an online resource I cited in the bibliography. To run the benchmark, you should
 execute the $run\_benchmarks.sh$ script and it will write the results in the 
 tests/benchmarks folder.
+
 For the benchmark test I used my personal laptop with an AMD Ryzen 7 3750H with Radeon Vega Mobile
 Gfx 2.30 GHz, 16.0 GB of RAM (13.9 GB usable), running Ubuntu 22.04. The tests where run using the
 gcc compiler, version gcc version 11.4.0 with the flags: -std=c++11 -isystem utils/benchmark/include 
@@ -353,7 +405,7 @@ Complexity: The time complexity is $\mathcal{O}(2^N)$, making it impractical for
 Use Case: While not efficient for large inputs, backtracking can be useful in cases where exact 
 solutions are needed for small tests.
 
-\begin{table}[h]
+\begin{table}[ht]
     \centering
     \begin{tabular}{@{}lrrr@{}}
         \textbf{Benchmark DP} & \textbf{Time (ns)} & \textbf{CPU (ns)} & \textbf{Iterations} \\
@@ -393,7 +445,7 @@ solutions are needed for small tests.
 \end{table}
 \clearpage
 
-\begin{table}[h]
+\begin{table}[ht]
     \centering
     \begin{tabular}{@{}lrrr@{}}
         \toprule
@@ -435,7 +487,7 @@ solutions are needed for small tests.
 \end{table}
 \clearpage
 
-\begin{table}[h]
+\begin{table}[ht]
     \centering
     \begin{tabular}{@{}lrrr@{}}
         \toprule
@@ -498,7 +550,7 @@ solutions are needed for small tests.
 %
 \begin{thebibliography}{8}
 \bibitem{ref_article1}
-Pavel, G.-I.: \emph{Knapsack problem}, \url{https://en.wikipedia.org/wiki/Knapsack_problem} Accesat la [04/01/2025].
+\emph{Knapsack problem}, \url{https://en.wikipedia.org/wiki/Knapsack_problem} Accesat la [04/01/2025].
 \bibitem{ref_article2}
 Kayode Badiru: \emph{KNAPSACK PROBLEMS; METHODS, MODELS AND APPLICATIONS},
 \url{https://shareok.org/server/api/core/bitstreams/7bb97e22-4c5d-44b3-b756-74aba3fc1fd7/content} 

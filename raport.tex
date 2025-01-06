@@ -83,50 +83,84 @@ overload in telecommunication systems.
 \subsection*{1. Financial Modeling}
 \begin{itemize}
     \item \textbf{Investment Portfolio Selection}: In finance, the Knapsack Problem
-	is used to select a combination of investment assets that maximize returns while
-	staying within a budget or risk tolerance. This involves balancing the trade-offs
-	between different financial instruments like stocks, bonds, and derivatives.
+        is used to select a combination of investment assets that maximize returns while
+        staying within a budget or risk tolerance. This involves balancing the trade-offs
+        between different financial instruments like stocks, bonds, and derivatives.
     \item \textbf{Capital Budgeting}: Companies use this problem to decide how to
-	allocate limited capital resources among various potential projects to maximize returns.
+        allocate limited capital resources among various potential projects to maximize returns.
 \end{itemize}
 
 \subsection*{2. Production and Inventory Management Systems}
 \begin{itemize}
     \item \textbf{Optimal Resource Allocation}: In production, the problem helps in
-	determining the best way to allocate limited resources like raw materials or machinery
-	to different products to maximize output or profit.
+        determining the best way to allocate limited resources like raw materials or machinery
+        to different products to maximize output or profit.
     \item \textbf{Inventory Control}: It is applied to decide which items to stock in
-	limited warehouse space, ensuring maximum profitability or utility while minimizing costs.
+        limited warehouse space, ensuring maximum profitability or utility while minimizing costs.
 \end{itemize}
 
 \subsection*{3. Stratified Sampling}
 \begin{itemize}
     \item \textbf{Survey Design}: In statistics, the Knapsack Problem helps in stratified
-	sampling by selecting a sample that represents different strata or subgroups of a population
-	in a cost-effective way, ensuring that the sample is both diverse and within budget constraints.
+        sampling by selecting a sample that represents different strata or subgroups of a population
+        in a cost-effective way, ensuring that the sample is both diverse and within budget constraints.
 \end{itemize}
 
 \subsection*{4. Design of Queuing Network Models in Manufacturing}
 \begin{itemize}
     \item \textbf{Production Line Optimization}: In manufacturing, the problem aids in the design
-	and optimization of queuing networks, where the goal is to minimize waiting times and costs
-	while maximizing throughput. This involves selecting the right combination of machines, processes
-	and workflows within budgetary and space constraints.
+        and optimization of queuing networks, where the goal is to minimize waiting times and costs
+        while maximizing throughput. This involves selecting the right combination of machines, processes
+        and workflows within budgetary and space constraints.
 \end{itemize}
 
 \subsection*{5. Control of Traffic Overload in Telecommunication Systems}
 \begin{itemize}
     \item \textbf{Bandwidth Allocation}: The Knapsack Problem is used to allocate limited bandwidth
-	resources to various communication channels or services to maximize overall network efficiency
-	and quality of service.
+        resources to various communication channels or services to maximize overall network efficiency
+        and quality of service.
     \item \textbf{Data Packet Prioritization}: It helps in determining which data packets should
-	be transmitted first based on their priority and the available network capacity to prevent
-	congestion and optimize network performance.
+        be transmitted first based on their priority and the available network capacity to prevent
+        congestion and optimize network performance.
 \end{itemize}
 
 %TODO: Amir:
+\newpage
 \section{NP-Hard Proof}
+The Knapsack problem has as inputs: \textbf{W} - the maximum weight of the sack, \textbf{N} - the number of objects and the \textbf{objects} themselves that have as proprieties: \textbf{weight and profit}. The program returns the maximum profit that you can get without exceeding the weight limit. In the following demonstration we only use the \textbf{fail()} NP function because it doesn't interrupt the execution of the other threads. We also assume that the assignments to the \textbf{MAX\_PROFIT} variable are \textbf{atomic}.
 
+\begin{lstlisting}[language=Python]
+MAX_PROFIT = 0 # the result will be kept here    
+def knapsack(W, N, Objects):
+    seen = N * [0]
+    current_weight = 0
+    current_profit = 0
+    sack = []
+
+    # generation phase
+    for i = 1 : N:
+        c = choice(0...N)
+        if c != 0:
+            if seen[c] == 1:
+                fail()
+            seen[c] = 1
+            sack.append(Objects[c])
+            current_weight += Objects[c]['weight']
+            if current_weight > W:
+                fail()
+            current_profit += Objects[c]['profit']
+
+    # testing phase
+    if current_profit > MAX_PROFIT:
+        MAX_PROFIT = current_profit
+        fail()
+
+    fail()
+
+                
+            
+        
+\end{lstlisting}
 % Andrei:
 \section{Description of the algorithms}
 \subsection{Dynamic programming}
@@ -134,16 +168,16 @@ There are two approaches to solve this problem using dynamic programming:
 using a memoization table (top-down) or tabulation (bottom-up). 
 \begin{itemize}
     \item \textbf{Memoization}: Using recursion to solve the Knapsack Problem results in an exponential
-	time complexity. This is due to the fact that the algorithm recomputes functions that have already
-	been processed multiple times. Instead of recomputing these values, we can utilize a \textit{memoization}
-	table to store the results of these functions. By doing so, we can significantly reduce the time complexity and make the algorithm more efficient. Memoization involves storing the results of previously computed subproblems in a table (often a two-dimensional array).
+        time complexity. This is due to the fact that the algorithm recomputes functions that have already
+        been processed multiple times. Instead of recomputing these values, we can utilize a \textit{memoization}
+        table to store the results of these functions. By doing so, we can significantly reduce the time complexity and make the algorithm more efficient. Memoization involves storing the results of previously computed subproblems in a table (often a two-dimensional array).
     \item \textbf{Tabulation}: This is the approach I chose to implement in code, because it is usually
-	faster then the memoization one owing to its iterative nature. Despite calculating all the
-	combinations of objects in the knapsack, the tabulation method is known as "Bottom-Up" since
-	it builds the solution incrementally from the smallest subproblems to the overall problem.
-	Tabulation involves filling up a table (typically a two-dimensional array, even though it can be
-	done using a one-dimensional array). Each entry in the table represents the solution to a subproblem,
-	and the solution to the overall problem is derived from these subproblem solutions.
+        faster then the memoization one owing to its iterative nature. Despite calculating all the
+        combinations of objects in the knapsack, the tabulation method is known as "Bottom-Up" since
+        it builds the solution incrementally from the smallest subproblems to the overall problem.
+        Tabulation involves filling up a table (typically a two-dimensional array, even though it can be
+        done using a one-dimensional array). Each entry in the table represents the solution to a subproblem,
+        and the solution to the overall problem is derived from these subproblem solutions.
 \end{itemize}
 
 \begin{lstlisting}
@@ -151,34 +185,34 @@ int N, G; // N - the number of objects, G - the capacity of the knapsack
 std::vector<std::vector<int>> dp; // dp matrix
 std::vector<int> weights, values; // weights and values of the objects
 inline int knapsack() {
-	for (int i = 0; i <= N; ++i)
-		dp[i][0] = 0;
-	for (int j = 0; j <= G; ++j)
-		dp[0][j] = 0;
+        for (int i = 0; i <= N; ++i)
+                dp[i][0] = 0;
+        for (int j = 0; j <= G; ++j)
+                dp[0][j] = 0;
 
-	for (int i = 1; i <= N; ++i) {
-		for (int w = 1; w <= G; ++w) {
-			if (weights[i - 1] <= w)
-				dp[i][w] = std::max(values[i - 1] + dp[i - 1][w - weights[i - 1]], dp[i - 1][w]);
-			else
-				dp[i][w] = dp[i - 1][w];
-		}
-	}
-	return dp[N][G];
+        for (int i = 1; i <= N; ++i) {
+                for (int w = 1; w <= G; ++w) {
+                        if (weights[i - 1] <= w)
+                                dp[i][w] = std::max(values[i - 1] + dp[i - 1][w - weights[i - 1]], dp[i - 1][w]);
+                        else
+                                dp[i][w] = dp[i - 1][w];
+                }
+        }
+        return dp[N][G];
 }
 
 inline std::vector<int> find_objects() {
-	std::vector<int> res;
-	int m = N, n = G;
-	while (n > 0 && m > 0) {
-		if (dp[m][n] != dp[m - 1][n]) {
-			n -= weights[m - 1];
-			res.push_back(m);
-		}
-		--m;
-	}
-	std::reverse(res.begin(), res.end());
-	return res;
+        std::vector<int> res;
+        int m = N, n = G;
+        while (n > 0 && m > 0) {
+                if (dp[m][n] != dp[m - 1][n]) {
+                        n -= weights[m - 1];
+                        res.push_back(m);
+                }
+                --m;
+        }
+        std::reverse(res.begin(), res.end());
+        return res;
 }
 \end{lstlisting}
 
@@ -242,20 +276,20 @@ std::vector<int> weights, values;
 std::vector<int> selection, current_selection;
 
 int knapsack(int index, int curr_weight, int curr_profit) {
-	if (index == N) {
-		if (curr_profit > maxx) {
-			maxx = curr_profit;
-			selection = current_selection;
-		}
-		return maxx;
-	}
+        if (index == N) {
+                if (curr_profit > maxx) {
+                        maxx = curr_profit;
+                        selection = current_selection;
+                }
+                return maxx;
+        }
 
-	if (curr_weight + weights[index] <= G) {
-		current_selection.push_back(index + 1);
-		maxx = std::max(maxx, knapsack(index + 1, curr_weight + weights[index], curr_profit + values[index]));
-		current_selection.pop_back();
-	}
-	return std::max(maxx, knapsack(index + 1, curr_weight, curr_profit));
+        if (curr_weight + weights[index] <= G) {
+                current_selection.push_back(index + 1);
+                maxx = std::max(maxx, knapsack(index + 1, curr_weight + weights[index], curr_profit + values[index]));
+                current_selection.pop_back();
+        }
+        return std::max(maxx, knapsack(index + 1, curr_weight, curr_profit));
 }
 \end{lstlisting}
 
@@ -410,9 +444,9 @@ solutions are needed for small tests.
 \begin{table}[ht]
     \centering
     \begin{tabular}{@{}lrrr@{}}
-		\toprule
+                \toprule
         \textbf{Benchmark DP} & \textbf{Time (ns)} & \textbf{CPU (ns)} & \textbf{Iterations} \\
-		\midrule
+                \midrule
         knapsack\_handler\_tabulation & 397274 & 397277 & 1851 \\
         knapsack\_handler\_tabulation & 451001 & 450761 & 1728 \\
         knapsack\_handler\_tabulation & 381943 & 381887 & 1507 \\

@@ -125,13 +125,19 @@ overload in telecommunication systems.
 \end{itemize}
 
 %TODO: Amir:
-\newpage
-\section{NP-Hard Proof}
-The Knapsack problem has as inputs: \textbf{W} - the maximum weight of the sack, \textbf{N} - the number of objects and the \textbf{objects} themselves that have as proprieties: \textbf{weight and profit}. The program returns the maximum profit that you can get without exceeding the weight limit. In the following demonstration we only use the \textbf{fail()} NP function because it doesn't interrupt the execution of the other threads. We also assume that the assignments to the \textbf{MAX\_PROFIT} variable are \textbf{atomic}.
+\section{NP-Complete Proof}
+\paragraph{General overview}
+The Knapsack problem has as inputs: \textbf{W} - the maximum weight of the sack, \textbf{N} - the number of objects and the \textbf{Objects} themselves that have as proprieties: \textbf{weight and profit}. The program returns the maximum profit that you can get without exceeding the weight limit\textit{(this format is used everywhere else in the paper)}. But, as to respect the algorithms' return convention we modify it so, the knapsack function also takes as input \textbf{P} - the profit goal and now returns \textit{true} if the goal was met, or \textit{false} otherwise.  
 
-\begin{lstlisting}[language=Python]
-MAX_PROFIT = 0 # the result will be kept here    
-def knapsack(W, N, Objects):
+\[
+ Knapsack \in NP-Complete \Rightarrow Knapsack \in NP,\ Knapsack \in NP-Hard
+\]
+\subsection{NP Proof}
+We show that the problem can be solved using a nondeterministic algorithm in \textit{NP time} and a solution can be checked in \textit{P time}.
+
+
+\begin{lstlisting}[language=Python] 
+def knapsack(W, N, P, Objects):
     seen = N * [0]
     current_weight = 0
     current_profit = 0
@@ -151,16 +157,29 @@ def knapsack(W, N, Objects):
             current_profit += Objects[c]['profit']
 
     # testing phase
-    if current_profit > MAX_PROFIT:
-        MAX_PROFIT = current_profit
-        fail()
+    if current_profit == P:
+        success()
 
     fail()
-
-                
-            
-        
 \end{lstlisting}
+
+\subsection{NP-Hard Proof}
+We assume to be known that the \textbf{SubsetSum problem} is included in the NP-Hard class. So we seek to prove that SubsetSum problem reduces polynomially to the Knapsack problem.
+\[
+Subset Sum \leq_{P} Knapsack \Rightarrow Knapsack \in NP-Hard
+\]
+SubsetSum takes as input: \textbf{M} - an array of integers and \textbf{Sum} - the target sum. It outputs \textit{true} if there is a subset of numbers from the array that has the sum equal to \textit{Sum}, or \textit{false} otherwise.
+The transfer function can be computed in \textbf{polynomial time} and it is as follows:
+
+\[SubsetSum(M, Sum) \rightarrow Knapsack(W, N, P, Objects)\]
+\[W = Sum, \ N = len(M), \ P = Sum, \ Objects = \{(x_i,x_i)\ |\ x_i \in M \} \]
+\textit{Correctness proof $(\Leftrightarrow)$} If $SubsetSum(M, Sum) = true \Leftrightarrow \exists S\in M$ so that the sum of S is equal to $Sum = W = P$ $\Leftrightarrow S' = \{(x_i, x_i) | x_i \in S\} \subseteq Objects \Leftrightarrow S'$ is a solution of the Knapsack problem $\Leftrightarrow Knapsack(W, N, P, Objects) = true$.
+
+
+\subsection{Proof Conclusion}
+Having demonstrated that \textbf{Knapsack} is of class NP and of class NP-Hard we can finally say that it is also a member of the NP-Complete class.
+
+
 % Andrei:
 \section{Description of the algorithms}
 \subsection{Dynamic programming}
@@ -440,7 +459,7 @@ evident from the exponential increase in execution time as the value of N grows.
 Complexity: The time complexity is $\mathcal{O}(2^N)$, making it impractical for large tests.
 Use Case: While not efficient for large inputs, backtracking can be useful in cases where exact 
 solutions are needed for small tests.
-
+\clearpage
 \begin{table}[ht]
     \centering
     \begin{tabular}{@{}lrrr@{}}
@@ -644,6 +663,12 @@ LNCS Homepage, \url{http://www.springer.com/lncs}, Accessed at [04/01/2025]
 
 \bibitem{ref_url3}
 Geeks for Geeks, \emph{0/1 Knapsack Problem}, \url{https://www.geeksforgeeks.org/0-1-knapsack-problem-dp-10/}, Accessed at [05/01/2025]
+
+\bibitem{ref_url4}
+Cornell University, \emph{ORIE 6300 Mathematical Programming I --- Lecture 25}, \url{https://people.orie.cornell.edu/dpw/orie6300/Lectures/lec25.pdf}, Accessed at [07/01/2025]
+
+\bibitem{ref_url5}
+Politehnica Bucharest, \emph{Analiza Algoritmilor Seria CC 2024 --- Capitolul 10 - Probleme NP-Complete}, Accessed at [07/01/2025]
 
 \end{thebibliography}
 \end{document}

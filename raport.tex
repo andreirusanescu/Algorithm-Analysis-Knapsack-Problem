@@ -40,10 +40,6 @@
 %
 \title{The Knapsack Problem}
 %
-%\titlerunning{Abbreviated paper title}
-% If the paper title is too long for the running head, you can set
-% an abbreviated paper title here
-%
 \author{Andrei RUSĂNESCU,
 Gabriel-Ioan PAVEL,
 Amir FALLAH-MIRZAEI,
@@ -51,9 +47,8 @@ Amir FALLAH-MIRZAEI,
 %
 \institute{University Politehnica of Bucharest}
 %
-\maketitle              % typeset the header of the contribution
+\maketitle
 %
-% Andrei:
 \begin{abstract}
 The present paper analyses several algorithms that solve the Knapsack problem,
 taking into account both the speed and the memory used by the program. It
@@ -63,17 +58,13 @@ one that obtains a result close to the right one.
 \end{abstract}
 %
 %
-%
-% Andrei:
 \section{Introduction}
 The Knapsack problem derives its name from the situation faced by someone who wants
 to fill their limited-capacity knapsack with the most valuable items that can fit.
 You can choose whether to put it in the bag or not put it at all, hence the name
 "0/1 Knapsack Problem". The problem has been studied for more than a century, with
 writings dating as far back as 1897. 
-% TODO: Gebi / Amir - mai adaugati informatie pt introduction
 
-% Andrei:
 \section{Practical Applications}
 The Knapsack Problem and its variations have a multitude of real life applications
 including financial modeling, production and inventory management systems, stratified
@@ -124,7 +115,6 @@ overload in telecommunication systems.
         congestion and optimize network performance.
 \end{itemize}
 
-%TODO: Amir:
 \section{NP-Complete Proof}
 \paragraph{General overview}
 The Knapsack problem has as inputs: \textbf{W} - the maximum weight of the sack, \textbf{N} - the number of objects and the \textbf{Objects} themselves that have as proprieties: \textbf{weight and profit}. The program returns the maximum profit that you can get without exceeding the weight limit\textit{(this format is used everywhere else in the paper)}. But, as to respect the algorithms' return convention we modify it so, the knapsack function also takes as input \textbf{P} - the profit goal and now returns \textit{true} if the goal was met, or \textit{false} otherwise.  
@@ -180,7 +170,6 @@ The transfer function can be computed in \textbf{polynomial time} and it is as f
 Having demonstrated that \textbf{Knapsack} is of class NP and of class NP-Hard we can finally say that it is also a member of the NP-Complete class.
 
 
-% Andrei:
 \section{Description of the algorithms}
 \subsection{Dynamic programming}
 There are two approaches to solve this problem using dynamic programming:
@@ -587,7 +576,7 @@ solutions are needed for small tests.
 \clearpage
 
 \section{Conclusions}
-%TODO: Gebi
+
 The following images are graphs representing the performance of each algorithm:
 
 \begin{figure}[h]
@@ -635,15 +624,8 @@ is its simplicity of the implementation, as it's a good starting point to unders
 With all of that being said, if we care about achieving a perfect result in a timely manner,
 we can conclude that the dynamic programming approach is the best one, and if we want a
 solution as fast as possible, although not perfect, the greedy algorithm is the way to go.
-%
-% ---- Bibliography ----
-%
-% BibTeX users should specify bibliography style 'splncs04'.
-% References will then be sorted and formatted in the correct style.
-%
-% \bibliographystyle{splncs04}
-% \bibliography{mybibliography}
-%
+
+
 \begin{thebibliography}{8}
 
 \bibitem{ref_article1}

@@ -606,9 +606,10 @@ based on the number of inputs and the execution time. Every algorithm shows
 an ascending trend, meaning that, generally, they take longer to complete
 the higher the number of sets of inputs they are given.
 
-Some tests appear to be faster than others that have less sets of inputs.
+Some tests appear to be faster than others that have a smaller input size.
 This is predominantly happening becuase the benchmarks were run in a multithreaded
-environment, where context switches were happening.
+environment, where a lot of context switches were happening and multiple tasks were
+running at the same time anyways.
 
 It is easy to say that the tabulation approach is by far the most reliable, albeit
 not the fastest. The speed of the greedy approach can be deceiving, suggesting it would be

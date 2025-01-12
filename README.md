@@ -19,6 +19,3 @@ capacity of the knapsack is generated randomly between max_weight // 2
 The weights of the objects are randomly generated between 1 and half of
 max_weight and the values between 1 and 1000. More info about the tests
 and their results is written in the pdf file.
-
-## Notes
-AI was used in the generation of the graphs.
